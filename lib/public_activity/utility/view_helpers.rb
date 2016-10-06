@@ -3,7 +3,7 @@ module PublicActivity
   # Module extending ActionView::Base and adding `render_activity` helper.
   module ViewHelpers
     # View helper for rendering an activity, calls {PublicActivity::Activity#render} internally.
-    def render_activity activities, options = {}
+    def public_activity_render_activity activities, options = {}
       if activities.is_a? PublicActivity::Activity
         activities.render self, options
       elsif activities.respond_to?(:map)
@@ -13,7 +13,7 @@ module PublicActivity
         activities.map {|activity| activity.render self, options.dup }.join.html_safe
       end
     end
-    alias_method :render_activities, :render_activity
+    alias_method :render_activities, :public_activity_render_activity
 
     # Helper for setting content_for in activity partial, needed to
     # flush remains in between partial renders.
